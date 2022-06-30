@@ -138,16 +138,28 @@ void del_beg(){
     
 }
 void del_end(){
-    if (tail==NULL)
+    if (head==NULL)
     {
         printf("there is no statement to delete ");
     }
+    else if(head==tail){
+        q=head;
+        head=tail=NULL;
+        printf("the deleted element id %d ",q->data);
+        free(q);        
+    }
     else
     {
-        q=tail;
-        tail=tail->prev;
-        printf("the deleted element id %d ",q->data);
-        free(q);
+        q=head;
+        while (q->next->next!=NULL)
+        {
+            q=q->next;
+        }
+        q->next=temp;
+        q=temp->prev;
+        q->next=NULL;
+        printf("the deleted element id %d ",temp->data);
+        free(temp);
     }
 }
 void del_pos(){
